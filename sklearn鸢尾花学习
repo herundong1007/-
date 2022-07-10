@@ -1,0 +1,35 @@
+#图像显示问题
+import matplotlib
+matplotlib.rcParams['axes.unicode_minus']=False
+import seaborn as sns
+sns.set(font="Kaiti",style="ticks",font_scale=1.4)
+import pandas as pd
+pd.set_option("max_colwidth",100)
+###
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn import metrics
+from sklearn.model_selection import train_test_split,cross_val_score
+from sklearn.decomposition import PCA
+from sklearn.datasets import load_iris
+from sklearn.model_selection import KFold,StratifiedKFold
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+from mlxtend.plotting import plot_decision_regions
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import GridSearchCV
+from sklearn.neighbors import KNeighborsClassifier
+###
+#数据准备，读取鸢尾花数据集
+X,y=load_iris(return_X_y=True)
+##为了方便数据的可视化分析，将数据降维到二维空间中
+pca=PCA(n_components=2,random_state=3)
+X=pca.fit_transform(X)
+##可视化数据降维在空间中的分布情况
+plt.figure(figsize=(10,6))
+sns.scatterplot(x=X[:,0], y=X[:,1],style=y)
+plt.title("Iris降维后")
+plt.legend(loc='lower right')
+plt.grid()
+plt.show()
