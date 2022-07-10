@@ -33,3 +33,27 @@ plt.title("Iris降维后")
 plt.legend(loc='lower right')
 plt.grid()
 plt.show()
+#####
+##k折交叉验证(KFold)
+##使用Kfold对Iris数据集分类
+kf=KFold(n_splits=6,random_state=1,shuffle=True)
+datakf=kf.split(X,y)
+##使用线性判别分类算法进行数据训练模型
+LDA_clf=LinearDiscriminantAnalysis(n_components=2)
+scores=[]   ##用于保存每个测试集上的精度
+plt.figure(figsize=(14,8))
+for ii,(train_index,test_index) in enumerate(datakf):
+    ##使用每个部分的训练数据训练模型
+    LDA_clf=LDA_clf.fit(X[train_index],y[train_index])
+    ##计算每次在测试数据上的预测精度
+    prey=LDA_clf.predict(X[test_index])
+    acc=metrics.accuracy_score(y[test_index],prey)
+    ##可视化每个模型在训练数据上的切分平面
+    plt.subplot(2,3,ii+1)
+    plot_decision_regions(X[train_index],y[train_index],LDA_clf)
+    plt.title("Test Acc:"+str(np.round(acc,4)))
+    scores.append(acc)
+plt.tight_layout()
+plt.show()
+##计算准确率的平均值
+print("平均Acc:",np.mean(scores))
