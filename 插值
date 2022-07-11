@@ -1,0 +1,17 @@
+A=xlsread("C:\Users\h'r'd\Desktop\地质积累指数.xlsx",1,'A2:L320');
+x=A(:,2);y=A(:,3);z=A(:,4)
+%[X,Y,Z]=griddata(x,y,z,linspace(0,30000)',linspace(0,20000),'cubic');
+%pcolor(X,Y,Z);shading interp
+%title('功能区')
+%figure,contourf(X,Y,Z);
+%figure,contour(X,Y,Z);
+%title('功能区')
+%figure,surf(X,Y,Z);
+nx=linspace(min(x),max(x),100);
+ny=linspace(min(y),max(y),100);
+[xx,yy]=meshgrid(nx,ny);
+zz=griddata(x,y,A(:,12),xx,yy,'cubic');
+surfl(xx,yy,zz);
+shading interp
+title('Zn元素的空间分布')
+figure
