@@ -22,3 +22,10 @@ dot_data = tree.export_graphviz(clf
                                )
 graph = graphviz.Source(dot_data)
 graph
+###########
+clf=tree.DecisonTreeClassifier(criterion="entropy",random_state=30,splitter="random",max_depth=3,min_samples_leaf=10
+                               min_samples_split=25)
+clf.clf.fit(Xtrain,Ytrain)
+dot_dota=tree.export_graphviz(clf,features_names=feature_name,class_names=["琴酒","雪莉","贝尔莫德"],filled=None,rounded=True)
+graph=graphviz.Source(dot_dota)
+graph
