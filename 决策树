@@ -9,3 +9,16 @@ clf=tree.DecisionTreeClassifier(criterion="entropy")
 clf=clf.fit(Xtrain,Ytrain)
 score=clf.score(Xtest,Ytest)
 score
+import sklearn.tree as tree
+import graphviz
+feature_name = ['酒精','苹果酸','灰','灰的碱性','镁','总酚','类黄酮','非黄烷类酚类','花青素','颜色强度','色调','od280/od315稀释葡萄酒','脯氨酸']
+dot_data = tree.export_graphviz(clf
+                                ,out_file=None
+                                ,feature_names= feature_name
+                                ,class_names=["琴酒","雪莉","贝尔摩德"]
+                                ,filled=True
+                                ,rounded=True
+                                
+                               )
+graph = graphviz.Source(dot_data)
+graph
